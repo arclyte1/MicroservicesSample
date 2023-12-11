@@ -15,7 +15,7 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build ./1 -f ./1/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/film-session:latest
+          docker build ./film_session -f ./film_session/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/film-session:latest
 
       - name: Login to DockerHub
         uses: docker/login-action@v3.0.0
@@ -35,7 +35,7 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build ./1 -f ./1/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/client:latest
+          docker build ./client -f ./client/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/client:latest
 
       - name: Login to YC Registry
         uses: docker/login-action@v3.0.0
