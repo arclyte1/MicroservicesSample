@@ -23,7 +23,8 @@ jobs:
           sudo apt update
           sudo apt install -y python3-pip
           pip install -r tests/requirements.txt
-          docker-compose up -d --build
+          docker buildx bake --load
+          docker-compose up -d
           sleep 20
 
       - name: Run e2e tests
