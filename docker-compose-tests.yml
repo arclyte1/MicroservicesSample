@@ -1,0 +1,51 @@
+version: '3.10'
+
+services:
+
+  'film-session':
+    image: 'film-session'
+    build: 
+      context: ./film_session
+    depends_on:
+      'film-session-db':
+        condition: service_healthy
+    environment:
+      - POSTGRES_URL=postgresql://film-session-db:5432/root
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123
+    ports:
+      - 8080:8080
+  
+  'film-session-db':
+    image: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root"]
+      interval: '5s'
+      start_period: '5s'
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123
+
+  'client':
+    image: 'client'
+    build: 
+      context: ./client
+    depends_on:
+      'client-db':
+        condition: service_healthy
+    environment:
+      - POSTGRES_URL=postgresql://client-db:5432/root
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123
+    ports:
+      - 8081:8080
+  
+  'client-db':
+    image: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root"]
+      interval: '5s'
+      start_period: '5s'
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123
