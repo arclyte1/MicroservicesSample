@@ -1,0 +1,4 @@
+FROM gradle:7.5.1-jdk17-alpine AS build
+COPY --chown=gradle:gradle . /home/gradle
+WORKDIR /home/gradle
+RUN gradle :test --tests "com.example.film_session.FilmSessionTests"

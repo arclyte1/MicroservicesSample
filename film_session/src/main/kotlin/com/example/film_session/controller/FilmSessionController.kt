@@ -2,6 +2,7 @@ package com.example.film_session.controller
 
 import com.example.film_session.model.FilmSession
 import com.example.film_session.service.FilmSessionService
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -32,8 +33,8 @@ class FilmSessionController(
     @GetMapping
     fun getAll(
         @RequestParam("ids", required = false) ids: String? = null,
-        @RequestParam("start_date", required = false) startDate: Date? = null,
-        @RequestParam("end_date", required = false) endDate: Date? = null
+        @RequestParam("start_date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) startDate: Date? = null,
+        @RequestParam("end_date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: Date? = null
     ): Iterable<FilmSession> {
         if (ids != null) {
             return service.allByIds(ids.split(",").map(String::toLong))
