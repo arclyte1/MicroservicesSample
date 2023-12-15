@@ -86,3 +86,7 @@ jobs:
           folder-id: ${{ secrets.YC_FOLDER_ID }}
           revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/client:latest
           revision-service-account-id: ${{ secrets.YC_SA_ID }}
+          revision-env: |
+            POSTGRES_URL=${{ secrets.YC_POSTGRES_URL }}
+            POSTGRES_USER=${{ secrets.YC_POSTGRES_USERNAME }}
+            POSTGRES_PASSWORD=${{ secrets.YC_POSTGRES_PASSWORD }}
