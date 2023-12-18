@@ -28,6 +28,15 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// define a BOM and its version
+	implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+
+	// define any required OkHttp artifacts without version
+	implementation("com.squareup.okhttp3:okhttp")
+
+	implementation("io.micrometer:micrometer-registry-prometheus")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 }
 
 tasks.withType<KotlinCompile> {
